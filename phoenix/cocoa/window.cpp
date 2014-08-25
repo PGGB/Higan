@@ -266,8 +266,10 @@ void pWindow::setGeometry(Geometry geometry) {
     [cocoaWindow
       setFrame:[cocoaWindow
         frameRectForContentRect:NSMakeRect(
-          geometry.x, Desktop::size().height - geometry.y - geometry.height,
-          geometry.width, geometry.height + statusBarHeight()
+          geometry.x,
+          max(0,Desktop::size().height - geometry.y - geometry.height),
+          geometry.width,
+          geometry.height + statusBarHeight()
         )
       ]
       display:YES
