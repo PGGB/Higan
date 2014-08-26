@@ -1,6 +1,8 @@
 #ifndef RUBY_INPUT_JOYPAD_SDL
 #define RUBY_INPUT_JOYPAD_SDL
 
+#include <SDL/SDL.h>
+
 namespace ruby {
 
 struct InputJoypadSDL {

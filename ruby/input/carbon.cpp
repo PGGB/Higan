@@ -1,6 +1,10 @@
+#include "joypad/sdl.cpp"
+
 namespace ruby {
 
 struct pInputCarbon {
+  InputJoypadSDL jp;
+
   struct Key {
     uint8_t id;
     string name;
@@ -13,6 +17,7 @@ struct pInputCarbon {
 
   bool cap(const string& name) {
     if(name == Input::KeyboardSupport) return true;
+    if(name == Input::JoypadSupport)   return true;
     return false;
   }
 
@@ -48,6 +53,8 @@ struct pInputCarbon {
     }
 
     devices.append(&kb.hid);
+
+    jp.poll(devices);
 
     return devices;
   }
@@ -173,10 +180,13 @@ struct pInputCarbon {
     kb.hid.id = 1;
     for(auto& key : keys) kb.hid.button().append({key.name});
 
+    jp.init();
+
     return true;
   }
 
   void term() {
+    jp.term();
   }
 };
 
